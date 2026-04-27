@@ -38,11 +38,13 @@ public class LogByGoogle {
     @PostMapping("/google")
     public ResponseEntity<?> googleAuth(@RequestBody Map<String , String> body){
         String token = body.get("token");
+        System.out.println("Received token: " + token);
 
         try{
             GoogleIdToken.Payload payload = verifyToken(token);
-
+            System.out.println("Payload: " + payload);
             if(payload == null){
+                System.out.println("Token verification failed");
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid token");
             }
             String email = payload.getEmail();
@@ -74,6 +76,7 @@ public class LogByGoogle {
                     "name", user.getFirstName()
             ));
         }catch(Exception e){
+            System.out.println("Exception: " + e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error verifying token");
         }
     }
