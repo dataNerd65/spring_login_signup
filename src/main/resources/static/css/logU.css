@@ -65,3 +65,19 @@ button{
     cursor: pointer;
     transition: 0.3s;
 }
+.or{
+    text-align: center;
+    margin: 15px 0;
+    font-weight: bold;
+    color: #555;
+}
+.google-container{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+.g_id_signin{
+    width: 100% !important;
+    display: flex;
+    justify-content: center;
+}

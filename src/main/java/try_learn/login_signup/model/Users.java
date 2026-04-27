@@ -22,15 +22,18 @@ public class Users {
     @Column(nullable = false, unique = false)
     private String lastName;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = true, unique = true)
     private String userName;
     private String phoneNumber;
 
     @Column(nullable=false, unique = true)
     private String email;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = true)
     private String password;
+
+    private String provider;
+    private String googleId;
 
 
 //    public User() {} // constructor // done by @NoArgsConstructor
