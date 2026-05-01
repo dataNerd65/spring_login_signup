@@ -1,6 +1,7 @@
 package try_learn.login_signup.service;
 
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +13,7 @@ import try_learn.login_signup.repository.UserRepository;
 import java.util.List;
 import java.util.Optional;
 
+@RequiredArgsConstructor
 @Service
 public class UserService {
     private final UserRepository userRepository;
@@ -34,12 +36,6 @@ public class UserService {
         // Encode and update
         user.setPassword(passwordEncoder.encode(request.getNewPassword()));
         //userRepository.save(user);  // stop redoing it hibernate will handle it.
-    }
-
-    // Constructor injection
-    public UserService (UserRepository userRepository, PasswordEncoder passwordEncoder){
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
     }
 
     // Get all users
@@ -66,7 +62,7 @@ public class UserService {
 
         user.setFirstName(userDetails.getFirstName());
         user.setLastName(userDetails.getLastName());
-        user.setEmail(userDetails.getEmail());
+        user.changeEmail(userDetails.getEmail());
         // user.setPassword(userDetails.getPassword());
 
         return userRepository.save(user);
@@ -85,6 +81,15 @@ public class UserService {
             return null;
         }
         return user;
+    }
+    public void updateEmail(Long id ,String newEmail){
+        Optional<Users> user = userRepository.findById(id);
+        if(user.isEmpty()){
+            throw new IllegalArgumentException("Email not found!");
+        }
+        if(userRepository.findByEmail(newEmail).isPresent()){
+            throw new IllegalArgumentException("User already in use!");
+        }
     }
 }
 // curl -X PUT http://localhost:8080/users/3 -H "Content-Type: application/json" -d '{"firstName":"Pierre","lastName":"Kiarie","userName":"kiarie","phoneNumber":"0769916158","email":"pkiarie812@gmail.com"}'

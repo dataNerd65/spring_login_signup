@@ -58,11 +58,11 @@ public class LogByGoogle {
             // logic
             Users user = userRepository.findByEmail(email).orElseGet(() -> {
                 Users newUser = new Users();
-                newUser.setEmail(email);
+                newUser.changeEmail(email);
                 newUser.setFirstName(firstName);
                 newUser.setLastName(lastName);
-                newUser.setProvider("GOOGLE");
-                newUser.setGoogleId(googleId);
+                newUser.getProvider("GOOGLE");
+                newUser.getGoogleId(googleId);
                 return userRepository.save(newUser);
             });
 
