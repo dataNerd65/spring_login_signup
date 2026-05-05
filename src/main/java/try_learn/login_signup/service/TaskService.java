@@ -33,17 +33,23 @@ public class TaskService {
     public Optional <Tasks> findTaskById(Long id){
         return taskRepository.findById(id);
     }
+
+    public Tasks findTaskByTitle(String title){
+         return taskRepository.findTasksByTitle(title).orElseThrow(() -> new IllegalArgumentException("Task not found!"));
+    }
+    // http://localhost:8080/tasks/getTaskByTitle?title=Study%20Spring%20Security what to frme my call as
+
     /*
     Create a Task
     * */
-    public Tasks createTask(Tasks task){
+    public void createTask(Tasks task){
         if(task.getPriority() == null){
             task.setPriority(Priority.MEDIUM);
         }
         if(task.getStatus() == null){
             task.setStatus(Status.PENDING);
         }
-        return taskRepository.save(task);
+        taskRepository.save(task);
     }
     /*
     delete a Task
