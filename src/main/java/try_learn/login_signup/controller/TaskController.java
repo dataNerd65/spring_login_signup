@@ -6,6 +6,7 @@ import try_learn.login_signup.model.Tasks;
 import try_learn.login_signup.service.TaskService;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/tasks")
@@ -16,7 +17,7 @@ public class TaskController {
         this.taskService = taskService;
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public List<Tasks> getAllTasks(){
         return taskService.getAllTasks();
     }
@@ -24,13 +25,24 @@ public class TaskController {
 //    public Tasks createTask(@RequestBody Tasks task){
 //        return taskService.createTask(task);
 //    }
-    @PostMapping
-    public ResponseEntity<Tasks> createTask(@Valid @RequestBody Tasks task){
-        return ResponseEntity.ok(taskService.createTask(task));
+    @GetMapping("/getTaskByTitle")
+    public Tasks getTaskByTitle(@RequestParam String title){
+        return taskService.findTaskByTitle(title);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteTask(@PathVariable Long id){
-        taskService.deleteTask(id);
+    @PostMapping("/addTask")
+    public ResponseEntity<String> createTask(@Valid @RequestBody Tasks task){
+        taskService.createTask(task);
+        return ResponseEntity.ok("Task created Successfully!" + " With ID " + task.getId());
     }
+
+//    @DeleteMapping("/{id}")
+//    public void deleteTask(@PathVariable Long id){
+//        taskService.deleteTask(id);
+//    }
+      @DeleteMapping("/delete/{id}")
+      public ResponseEntity<String> deleteTask(@PathVariable Long id){
+        taskService.deleteTask(id);
+        return ResponseEntity.ok("Task with id " + id +" deleted successfully");
+      }
 }
