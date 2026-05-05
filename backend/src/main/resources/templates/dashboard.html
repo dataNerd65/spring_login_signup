@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+<!--    <link rel="stylesheet" href="/css/logU.css">-->
+<!--    <script src="/js/script.js"></script>-->
+</head>
+<body>
+<h1>Welcome User!</h1>
+<form id="TitleForm">
+    <h2>Add a task</h2>
+
+    <div class="input-group">
+        <label for="title">Title (required):</label>
+        <input type="text" name="title" id="title" placeholder="title" required/>
+    </div>
+    <div class="input-group">
+        <label for="description">Description (required):</label>
+        <input type="text" name="description" id="description" placeholder="description" required/>
+    </div>
+    <div class="input-group">
+        <label for="description">Due Date (required):</label>
+        <label for="dueDate"></label><input type="date" name="dueDate" id="dueDate" placeholder="Due Date" required/>
+    </div>
+    <div class="input-group">
+    <label for="priority">Priority:</label>
+    <select id="priority" name="priority">
+        <option value="active">Active</option>
+        <option value="inactive">Inactive</option>
+        <option value="pending">Pending</option>
+    </select>
+    </div>
+    <div class="input-group">
+        <label for="status">Status:</label>
+        <select id="status" name="status">
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+            <option value="pending">Pending</option>
+        </select>
+    </div>
+
+    <div class="input-group">
+        <button type="submit" name="submit" id="submit">Add Task</button>
+    </div>
+
+
+</form>
+
+</body>
+</html>
